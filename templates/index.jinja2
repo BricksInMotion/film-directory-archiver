@@ -1,0 +1,13 @@
+{% extends 'base.jinja2' %}
+
+{% block content -%}
+<ul>
+  {% for year in years -%}
+    <li><a href="films/{{ year }}/index.html">{{ year }}</a></li>
+  {% endfor -%}
+</ul>
+{% endblock %}
+
+{% block scripts %}
+  <script type="module" src="js/index.js"></script>
+{% endblock -%}

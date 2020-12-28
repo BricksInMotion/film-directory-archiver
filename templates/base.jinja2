@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title }} | Bricks in Motion Film Directory Archive</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="page-{{ page_class }}">
+  <header>
+    <h1>BiM Film Directory Archive</h1>
+    <h2>{{ page_title }}</h2>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="search.html">Search</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock -%}
+  </main>
+
+  <footer>
+    <div><a href="https://bricksinmotion.com">Bricks in Motion</a></div>
+  </footer>
+  {% block scripts %}{% endblock -%}
+</body>
+</html>
