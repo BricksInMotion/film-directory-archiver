@@ -1,7 +1,7 @@
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from src.core import films
-from src.helpers import api
+from src.helpers import api, filters
 
 
 def main():
@@ -10,6 +10,10 @@ def main():
         loader=PackageLoader("archiver", "templates"),
         autoescape=select_autoescape(["html"]),
     )
+
+    # Register any custom filters
+    for f in filters.ALL_FILTERS.values():
+        env.filters[f.__name__] = f
 
     # Set up the dist folder
     film_years = films.get.years()
