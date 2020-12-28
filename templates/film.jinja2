@@ -1,6 +1,112 @@
 {% extends 'base.jinja2' %}
 
 {% block content -%}
+  <section class="film-info">
+    <div class="thumbnail">
+      <img class="film-thumbnail" alt="{{ film.info.title }}" src="/films/images/{{ film.info.thumbnail }}">
+    </div>
+
+    <div class="details">
+      <h2>{{ film.info.title }}</h2>
+      <span>
+        <strong>Directed By</strong>: <a href="/director.php?id={{ director.id }}">
+          {{ director.real_name }} <small>({{ director.user_name }})</small>
+        </a>
+      </span><br>
+      <span><strong>Released</strong>: {{ film.info.release_date|format_film_release_date }}</span><br>
+      <span><strong>Runtime</strong>: {{ film.info.runtime|format_film_runtime }}</span><br>
+
+      <div class="film-genres"><strong>Genres</strong>:
+      {% for genre in film.genres %}
+        <span class="genre">{{ genre }}</span>
+      {% endfor %}
+      </div>
+
+      <span>
+        {% set word = 'vote' if rating.rating.total_votes|int == 1 else 'votes' %}
+        <strong>Rating</strong>: {{ rating.rating.rating }}/5 (out of {{ rating.rating.total_votes }} {{ word }})
+      </span>
+      <br>
+
+      <div class="film-warnings"><strong>Content Advisory</strong>:
+      {% for advisory in film.advisories %}
+        <span class="warning {{ advisory.severity }}"> {{ advisory.severity|capitalize }} {{ advisory.type }}</span>
+      {% endfor %}
+      </div>
+    </div>
+
+    {#
+    <section class="film-links">
+      <h3>Watch</h3>
+      <div>
+        <?php
+        if (count(film.links) === 0):
+          echo 'No links available'
+        endif
+        foreach (film.links as record):
+          echo "<span class=\"link\"><a href=\"{record.url}\" target=\"_blank\">{record.label}</a></span>"
+        endforeach
+        }}
+      </div>
+    </section>
+  </section>
+
+  <section class="film-desc">
+    <h3>Director's Description</h3>
+    <blockquote>{{ film.info.description|convert_bb_code }}</blockquote>
+  </section>
+
+  <section class="film-critiques">
+    <div class="film-cast-crew">
+      <h3>Cast &amp Crew</h3>
+      <?php
+        foreach (film.cast_crew as job):
+          // Break up the crew name for people with multiple roles
+          job_crewname = str_replace('/', '<br>', job.role, count)
+          echo "<div>
+            <a href=\"director.php?id={job.user_id}\">{job.user_name}</a>
+            <span class=\"crewname\">{job.description}</span>
+          </div>"
+
+          // For every line we had to break, shift the next role down
+          // to keep everything aligned
+          echo str_repeat('<br>', count)
+        endforeach
+        }}
+    </div>
+
+    <div class="film-honors">
+      <h3>Honors</h3>
+      {{ film.honors }}
+      <span></span>
+    </div>
+
+    <div class="film-staff-ratings">
+      <h3>Staff Ratings</h3>
+      <?php
+        foreach (film.staff_ratings as sr):
+          echo "<div class=\"{sr.class}\">
+            <strong>{sr.category}</strong>
+            <span>{sr.rating}</span>
+          </div>"
+        endforeach
+        }}
+    </div>
+  </section>
+
+  <section class="film-reviews">
+    <h3>Staff Reviews</h3>
+    <?php
+    foreach (film.reviews as review): }}
+    <blockquote>
+      <strong>{{ review.user_name }}</strong>
+      <p>{{ review.comments|convert_bb_code }}</p>
+    </blockquote>
+    <?php endforeach }}
+  </section>
+#}
+
+
   {{ film }}
   {{ director }}
   {{ rating }}
