@@ -5,7 +5,7 @@
   <div class="film film-{{ film.id }}">
     <img class="film-thumbnail" alt="{{ film.title }}" src="films/images/{{ film.thumbnail }}"><br>
     <a href="{{ film.id }}.html">{{ film.title }}</a><br>
-    <span>{{ film.date }}</span>
+    <span>{{ film.date|format_film_release_date }}</span>
   </div>
 {% endfor -%}
 {% endblock %}

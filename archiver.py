@@ -69,7 +69,7 @@ def main():
             # Generate an HTML page with the information
             render_opts = {
                 "page_class": "film",
-                "page_title": film["title"],
+                "page_title": "View film",
                 "film": film_info,
                 "director": director_info,
                 "rating": rating_info,
