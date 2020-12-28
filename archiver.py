@@ -54,12 +54,21 @@ def main():
             data=films.make.render("year", render_opts, env),
         )
 
-        # For each film in that year, generate an HTML page for it
+        # For each film in that year, fetch all of its info
         for film in films_in_year:
+            film_info = api.get("film", params={"id": film["id"], "props": "all"})
+            director_info = api.get(
+                "director", params={"id": film_info["info"]["user_id"]}
+            )
+            rating_info = api.get("rating", params={"id": film["id"]})
+
+            # Generate an HTML page with the information
             render_opts = {
                 "page_class": "film",
                 "page_title": film["title"],
-                "film": api.get("film", params={"id": film["id"], "props": "all"}),
+                "film": film_info,
+                "director": director_info,
+                "rating": rating_info,
             }
             films.make.page(
                 "films",
