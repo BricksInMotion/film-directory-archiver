@@ -35,10 +35,36 @@ def main():
     # For each year we have films,
     # record the data for the films in that year
     film_data = []
-    for year in film_years[0:4]:
+    for year in film_years[0:3]:
         films_in_year = films.get.films_in_year(year)
         film_data.extend(films_in_year)
-        print(films_in_year)
+
+        # Generate an index listing page for every year
+        render_opts = {
+            "page_class": "year",
+            "page_title": f"{year} Films",
+            "films": films_in_year,
+        }
+        films.make.page(
+            "films",
+            year,
+            "index.html",
+            data=films.make.render("year", render_opts, env),
+        )
+
+        # For each film in that year, generate an HTML page for it
+        for film in films_in_year:
+            render_opts = {
+                "page_class": "film",
+                "page_title": film["title"],
+                "film": film,
+            }
+            films.make.page(
+                "films",
+                year,
+                f"{film['id']}.html",
+                data=films.make.render("film", render_opts, env),
+            )
 
     # Create a JSON file that we can use in the final site
     # to provide a basic searchable film directory
