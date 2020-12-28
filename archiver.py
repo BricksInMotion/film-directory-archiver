@@ -36,6 +36,7 @@ def main():
     # record the data for the films in that year
     film_data = []
     for year in film_years[0:3]:
+        print(f"Current year: {year}")
         films_in_year = films.get.films_in_year(year)
         film_data.extend(films_in_year)
 
