@@ -12,7 +12,7 @@ def main():
     )
 
     # Register any custom filters
-    for f in filters.ALL_FILTERS.values():
+    for f in filters.ALL_FILTERS:
         env.filters[f.__name__] = f
 
     # Set up the dist folder

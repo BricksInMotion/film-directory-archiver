@@ -24,7 +24,21 @@ def format_film_release_date(release_date: str) -> str:
     return date.fromisoformat(release_date).strftime("%B %d, %Y")
 
 
-ALL_FILTERS = {
-    "format_film_runtime": format_film_runtime,
-    "format_film_release_date": format_film_release_date,
-}
+def convert_bb_code(text: str) -> str:
+    start_bb_tags = ["[b]", "[i]"]
+    start_html_tags = ["<strong>", "<em>"]
+    end_bb_tags = ["[/b]", "[/i]"]
+    end_html_tags = ["</strong>", "</em>"]
+
+    # Sanitize the data and convert the BBCode tags to HTML
+    # text = str_replace(start_bb_tags, start_html_tags, text)
+    # text = str_replace(end_bb_tags, end_html_tags, text)
+    # return nl2br(trim(text))
+    return text
+
+
+ALL_FILTERS = [
+    format_film_runtime,
+    format_film_release_date,
+    convert_bb_code,
+]
