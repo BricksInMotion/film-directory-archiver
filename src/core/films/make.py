@@ -47,4 +47,4 @@ def search_json(data: dict) -> None:
 
 
 def page(*args: str, data: str = ""):
-    (sys_vars.get_path("DEST_PATH").joinpath(*args)).write_text(data)
+    (sys_vars.get_path("DEST_PATH").joinpath(*args)).write_bytes(bytes(data, "utf-8"))
