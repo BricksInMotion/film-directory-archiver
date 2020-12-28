@@ -1,6 +1,7 @@
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from src.core import films
+from src.helpers import api
 
 
 def main():
@@ -58,7 +59,7 @@ def main():
             render_opts = {
                 "page_class": "film",
                 "page_title": film["title"],
-                "film": film,
+                "film": api.get("film", params={"id": film["id"], "props": "all"}),
             }
             films.make.page(
                 "films",
