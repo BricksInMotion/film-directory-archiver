@@ -1,5 +1,6 @@
-from math import floor
 from datetime import date
+from math import floor
+from typing import Callable
 
 
 def format_film_runtime(runtime: str) -> str:
@@ -25,19 +26,16 @@ def format_film_release_date(release_date: str) -> str:
 
 
 def convert_bb_code(text: str) -> str:
-    start_bb_tags = ["[b]", "[i]"]
-    start_html_tags = ["<strong>", "<em>"]
-    end_bb_tags = ["[/b]", "[/i]"]
-    end_html_tags = ["</strong>", "</em>"]
+    bb_tags = ["[b]", "[/b]", "[i]", "[/i]", "\n"]
+    html_tags = ["<strong>", "</strong>", "<em>", "</em>", "<br>\n"]
 
-    # Sanitize the data and convert the BBCode tags to HTML
-    # text = str_replace(start_bb_tags, start_html_tags, text)
-    # text = str_replace(end_bb_tags, end_html_tags, text)
-    # return nl2br(trim(text))
-    return text
+    # Convert the BBCode tags to HTML
+    for i, v in enumerate(bb_tags):
+        text = text.replace(v, html_tags[i])
+    return text.strip()
 
 
-ALL_FILTERS = [
+ALL_FILTERS: list[Callable] = [
     format_film_runtime,
     format_film_release_date,
     convert_bb_code,
