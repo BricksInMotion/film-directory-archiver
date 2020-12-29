@@ -35,23 +35,20 @@
       </div>
     </div>
 
-    {#
     <section class="film-links">
       <h3>Watch</h3>
       <div>
-        <?php
-        if (count(film.links) === 0):
-          echo 'No links available'
-        endif
-        foreach (film.links as record):
-          echo "<span class=\"link\"><a href=\"{record.url}\" target=\"_blank\">{record.label}</a></span>"
-        endforeach
-        }}
+        {% if film.links|length == 0 %}
+          <span>No links available</span>
+        {% else %}
+          {% for link in film.links %}
+            <span class="link"><a href="{{ link.url }}">{{ link.label }}</a></span>
+          {% endfor %}
+        {% endif %}
       </div>
     </section>
   </section>
 
-  #}
   <section class="film-desc">
     <h3>Director's Description</h3>
     <blockquote>{{ film.info.description|convert_bb_code }}</blockquote>
