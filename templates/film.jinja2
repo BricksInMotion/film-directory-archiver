@@ -51,11 +51,13 @@
     </section>
   </section>
 
+  #}
   <section class="film-desc">
     <h3>Director's Description</h3>
     <blockquote>{{ film.info.description|convert_bb_code }}</blockquote>
   </section>
 
+  {#
   <section class="film-critiques">
     <div class="film-cast-crew">
       <h3>Cast &amp Crew</h3>
@@ -94,17 +96,16 @@
     </div>
   </section>
 
+#}
   <section class="film-reviews">
     <h3>Staff Reviews</h3>
-    <?php
-    foreach (film.reviews as review): }}
+    {% for review in film.reviews %}
     <blockquote>
       <strong>{{ review.user_name }}</strong>
       <p>{{ review.comments|convert_bb_code }}</p>
     </blockquote>
-    <?php endforeach }}
+    {% endfor %}
   </section>
-#}
 
 
   {{ film }}
