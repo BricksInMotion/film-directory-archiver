@@ -10,7 +10,7 @@ __all__ = ["dist", "render", "page", "search_json"]
 
 
 def dist(dir_names: list[str]) -> None:
-    dist_path = sys_vars.get_path("DEST_PATH")
+    dist_path = sys_vars.get_path("DIST_PATH")
 
     # Create the film years folders
     for dir_name in dir_names:
@@ -20,7 +20,6 @@ def dist(dir_names: list[str]) -> None:
     (dist_path / "films" / "images").mkdir(parents=True, exist_ok=True)
 
     # Create the site static files folders and files
-    (dist_path / "images").mkdir(parents=True, exist_ok=True)
     src_path = fspath(Path() / "src" / "static")
     shutil.copytree(src_path, fspath(dist_path), dirs_exist_ok=True)
 
@@ -35,7 +34,7 @@ def render(
 
 
 def search_json(data: dict) -> None:
-    json_file = sys_vars.get_path("DEST_PATH") / "js" / "films.js"
+    json_file = sys_vars.get_path("DIST_PATH") / "js" / "films.js"
     str_data = json.dumps(data)
 
     # After we stringify the JSON data, append the following
@@ -47,4 +46,4 @@ def search_json(data: dict) -> None:
 
 
 def page(*args: str, data: str = ""):
-    (sys_vars.get_path("DEST_PATH").joinpath(*args)).write_bytes(data.encode())
+    (sys_vars.get_path("DIST_PATH").joinpath(*args)).write_bytes(data.encode())
