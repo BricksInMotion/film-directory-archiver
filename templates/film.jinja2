@@ -9,9 +9,7 @@
     <div class="details">
       <h2>{{ film.info.title }}</h2>
       <span>
-        <strong>Directed By</strong>: <a href="/director.php?id={{ director.id }}">
-          {{ director.real_name }} <small>({{ director.user_name }})</small>
-        </a>
+        <strong>Directed By</strong>: {{ director.real_name }} <small>({{ director.user_name }})</small>
       </span><br>
       <span><strong>Released</strong>: {{ film.info.release_date|format_film_release_date }}</span><br>
       <span><strong>Runtime</strong>: {{ film.info.runtime|format_film_runtime }}</span><br>
@@ -54,10 +52,21 @@
     <blockquote>{{ film.info.description|convert_bb_code }}</blockquote>
   </section>
 
-  {#
-  <section class="film-critiques">
+   <section class="film-critiques">
     <div class="film-cast-crew">
       <h3>Cast &amp Crew</h3>
+      {% for job in film.cast_crew %}
+        {# Break up the crew name for people with multiple roles -#}
+        {% set count = job.role.count('/') %}
+        {% set job_crewname = job.role.replace('/', '<br>') %}
+        <div>
+          <span>{{ job.user_name }}</span>
+          <span class="crewname">{{ job.description }}</span>
+        </div>
+        {# For every line we had to break, shift the next role down to keep everything aligned -#}
+        {{ '<br>' * count }}
+      {% endfor %}
+      {#
       <?php
         foreach (film.cast_crew as job):
           // Break up the crew name for people with multiple roles
@@ -71,29 +80,25 @@
           // to keep everything aligned
           echo str_repeat('<br>', count)
         endforeach
-        }}
+      #}
     </div>
 
     <div class="film-honors">
       <h3>Honors</h3>
-      {{ film.honors }}
-      <span></span>
+      <span>{{ film.honors }}</span>
     </div>
 
     <div class="film-staff-ratings">
       <h3>Staff Ratings</h3>
-      <?php
-        foreach (film.staff_ratings as sr):
-          echo "<div class=\"{sr.class}\">
-            <strong>{sr.category}</strong>
-            <span>{sr.rating}</span>
-          </div>"
-        endforeach
-        }}
+      {% for staff_rating in film.staff_ratings %}
+      <div class="{{ staff_rating.class }}">
+        <strong>{{ staff_rating.category }}</strong>
+        <span>{{ staff_rating.rating }}</span>
+      </div>
+      {% endfor %}
     </div>
   </section>
 
-#}
   <section class="film-reviews">
     <h3>Staff Reviews</h3>
     {% for review in film.reviews %}
@@ -106,6 +111,4 @@
 
 
   {{ film }}
-  {{ director }}
-  {{ rating }}
 {% endblock %}
