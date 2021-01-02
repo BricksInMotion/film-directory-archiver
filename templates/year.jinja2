@@ -3,7 +3,7 @@
 {% block content -%}
 {% for film in films -%}
   <div class="film film-{{ film.id }}">
-    <img class="film-thumbnail" alt="{{ film.title }}" src="films/images/{{ film.thumbnail }}"><br>
+    <img class="film-thumbnail" alt="{{ film.title }}" src="{{ 'SITE_DOMAIN'|get_path }}/films/images/{{ film.thumbnail }}"><br>
     <a href="{{ film.id }}.html">{{ film.title }}</a><br>
     <span>{{ film.date|format_film_release_date }}</span>
   </div>

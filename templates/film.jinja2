@@ -3,13 +3,13 @@
 {% block content -%}
   <section class="film-info">
     <div class="thumbnail">
-      <img class="film-thumbnail" alt="{{ film.info.title }}" src="/films/images/{{ film.info.thumbnail }}">
+      <img class="film-thumbnail" alt="{{ film.info.title }}" src="{{ 'SITE_DOMAIN'|get_path }}/films/images/{{ film.info.thumbnail }}">
     </div>
 
     <div class="details">
       <h2>{{ film.info.title }}</h2>
       <span>
-        <strong>Directed By</strong>: {{ director.real_name }} <small>({{ director.user_name }})</small>
+        <strong>Directed By</strong>: {{ director.user_name }}
       </span><br>
       <span><strong>Released</strong>: {{ film.info.release_date|format_film_release_date }}</span><br>
       <span><strong>Runtime</strong>: {{ film.info.runtime|format_film_runtime }}</span><br>
@@ -26,10 +26,11 @@
       </span>
       <br>
 
-      <div class="film-warnings"><strong>Content Advisory</strong>:
-      {% for advisory in film.advisories %}
-        <span class="warning {{ advisory.severity }}"> {{ advisory.severity|capitalize }} {{ advisory.type }}</span>
-      {% endfor %}
+      <div class="film-warnings">
+        <strong>Content Advisory</strong>:
+        {% for advisory in film.advisories -%}
+        <span class="warning {{ advisory.severity }}">{{ advisory.severity|capitalize }} {{ advisory.type }}</span>
+        {% endfor -%}
       </div>
     </div>
 
@@ -108,7 +109,4 @@
     </blockquote>
     {% endfor %}
   </section>
-
-
-  {{ film }}
 {% endblock %}
