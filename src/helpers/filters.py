@@ -35,8 +35,13 @@ def convert_bb_code(text: str) -> str:
     return text.strip()
 
 
+def current_year(_: str) -> str:
+    return date.today().year
+
+
 ALL_FILTERS: list[Callable] = [
     format_film_runtime,
     format_film_release_date,
     convert_bb_code,
+    current_year,
 ]

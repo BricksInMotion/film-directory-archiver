@@ -1,10 +1,109 @@
-*, *::before, *::after { box-sizing: border-box; }
+:root {
+  --primary-font: "IBM Plex Sans", sans-serif;
+  --header-font: "Raleway", var(--primary-font);
+  --bim-red: #df3e5d;
+  --bim-yellow: #feb033;
+  --bim-blue: #00a3b8;
+  --bim-orange: #ffb034;
+  --bim-black: #071019;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   padding: 0;
 
-  font-family: sans-serif;
-  font-size: 18px;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  font-family: var(--primary-font);
+  font-size: 14px;
   line-height: 1.65;
+}
+
+a img {
+  border: none;
+}
+
+header {
+  width: 100%;
+  min-height: 4em;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+
+  background-color: var(--bim-black);
+  z-index: 10;
+}
+
+header a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+header > a {
+  margin-left: 19%;
+}
+
+#BimLogoText {
+  color: white;
+  font-weight: 700;
+  font-family: var(--header-font);
+  text-transform: uppercase;
+  font-size: 2em;
+  margin-left: 0.5em;
+}
+
+header ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  padding-left: 0.5rem;
+}
+
+header li {
+  margin-right: 1.2em;
+  margin-left: 1.2em;
+}
+
+header li a {
+  color: var(--bim-orange);
+  font-family: var(--primary-font);
+  font-size: 1.4em;
+  font-weight: 200;
+  text-decoration: none;
+  text-shadow: 0px 0 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+}
+
+
+main {
+  flex: 1;
+}
+
+footer {
+  padding: 2em;
+
+  text-align: center;
+  background-color: var(--bim-black);
+  color: #fff;
+}
+
+footer a {
+  color: var(--bim-orange);
 }

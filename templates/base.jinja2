@@ -4,30 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ page_title }} | Bricks in Motion Film Directory Archive</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,600,600i|Raleway:200,400,700&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="page-{{ page_class }}">
   <header>
-    <h1>BiM Film Directory Archive</h1>
-    <h2>{{ page_title }}</h2>
-  </header>
+    <a href="#">
+      <img alt="Bricks in Motion" src="img/BiM-Logo-Site.png" width="50" height="">
+      <span id="BimLogoText">Bricks in Motion</span>
+    </a>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="search.html">Search</a></li>
-      <li><a href="https://bricksinmotion.com">Main Site</a></li>
-    </ul>
-  </nav>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Search</a></li>
+        <li><a href="https://bricksinmotion.com">Main Site</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
     {% block content %}{% endblock -%}
   </main>
 
   <footer>
-    <div><a href="https://bricksinmotion.com">Bricks in Motion</a></div>
+    <div>&copy; 2008 — {{ ''|current_year }} <a href="https://bricksinmotion.com">Bricks in Motion</a>.<br>
+      All works copyright of their respective creators.<br>
+      LEGO&reg; is a trademark of the LEGO Group of companies which does not sponsor, authorize or endorse this site.</div>
   </footer>
+
   {% block scripts %}{% endblock -%}
 </body>
 </html>
