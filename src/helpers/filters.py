@@ -41,8 +41,8 @@ def current_year(_: str) -> str:
     return date.today().year
 
 
-def get_path(name: str) -> str:
-    return sys_vars.get(name)
+def get_site_domain(_: str) -> str:
+    return sys_vars.get("SITE_DOMAIN")
 
 
 ALL_FILTERS: list[Callable] = [
@@ -50,5 +50,5 @@ ALL_FILTERS: list[Callable] = [
     format_film_release_date,
     convert_bb_code,
     current_year,
-    get_path,
+    get_site_domain,
 ]
