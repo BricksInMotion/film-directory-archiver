@@ -2,6 +2,8 @@ from datetime import date
 from math import floor
 from typing import Callable
 
+import sys_vars
+
 
 def format_film_runtime(runtime: str) -> str:
     # A film is always >= 1 second. If this case is hit,
@@ -39,9 +41,14 @@ def current_year(_: str) -> str:
     return date.today().year
 
 
+def get_path(name: str) -> str:
+    return sys_vars.get(name)
+
+
 ALL_FILTERS: list[Callable] = [
     format_film_runtime,
     format_film_release_date,
     convert_bb_code,
     current_year,
+    get_path,
 ]
