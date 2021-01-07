@@ -1,3 +1,4 @@
+from time import time
 from jinja2 import Environment, PackageLoader, select_autoescape
 
 from src.core import films
@@ -5,6 +6,8 @@ from src.helpers import api, filters
 
 
 def main():
+    start_time = time()
+
     # Start by creating a Jinja2 renderer
     env = Environment(
         loader=PackageLoader("archiver", "templates"),
@@ -84,6 +87,10 @@ def main():
     # Create a JSON file that we can use in the final site
     # to provide a basic searchable film directory
     films.make.search_json(film_data)
+
+    # Provide a basic "how long did it run" recording
+    total_time = time() - start_time
+    print(f"{total_time}=")
 
 
 if __name__ == "__main__":
