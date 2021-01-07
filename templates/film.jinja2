@@ -56,9 +56,9 @@
    <section class="film-critiques">
     <div class="film-cast-crew">
       <h3>Cast &amp Crew</h3>
-      {% for job in film.cast_crew %}
+      {% for job in film.cast_crew -%}
         {# Break up the crew name for people with multiple roles -#}
-        {% set count = job.role.count('/') %}
+        {% set count = job.role.count('/') -%}
         {% set job_crewname = job.role.replace('/', '<br>') %}
         <div>
           <span>{{ job.user_name }}</span>
@@ -66,22 +66,7 @@
         </div>
         {# For every line we had to break, shift the next role down to keep everything aligned -#}
         {{ '<br>' * count }}
-      {% endfor %}
-      {#
-      <?php
-        foreach (film.cast_crew as job):
-          // Break up the crew name for people with multiple roles
-          job_crewname = str_replace('/', '<br>', job.role, count)
-          echo "<div>
-            <a href=\"director.php?id={job.user_id}\">{job.user_name}</a>
-            <span class=\"crewname\">{job.description}</span>
-          </div>"
-
-          // For every line we had to break, shift the next role down
-          // to keep everything aligned
-          echo str_repeat('<br>', count)
-        endforeach
-      #}
+      {% endfor -%}
     </div>
 
     <div class="film-honors">
